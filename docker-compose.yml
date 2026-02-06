@@ -1,0 +1,16 @@
+services:
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - "3000:3000"
+    volumes:
+      - type: bind
+        source: /home/linuxbrew/.linuxbrew/bin/gog
+        target: /usr/local/bin/gog
+        read_only: true
+      - type: bind
+        source: /home/maneco/.config/gogcli
+        target: /root/.config/gogcli
+        read_only: true
