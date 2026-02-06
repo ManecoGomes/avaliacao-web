@@ -7,8 +7,8 @@ services:
       - "3000:3000"
     volumes:
       - type: bind
-        source: /home/linuxbrew/.linuxbrew/bin/gog
-        target: /usr/local/bin/gog
+        source: /home/linuxbrew/.linuxbrew/bin/
+        target: /linuxbrew/bin
         read_only: true
       - type: bind
         source: /home/maneco/.config/gogcli
