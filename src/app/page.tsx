@@ -2,11 +2,21 @@
 
 import { useState } from "react";
 
+type CreateCaseResult = Record<string, unknown> & {
+    caseId?: string;
+    drive?: {
+          root?: {
+                  link?: string;
+                };
+        };
+  };
+
+
 export default function Home() {
   const [tipo, setTipo] = useState("apartamento");
   const [iptu, setIptu] = useState<File | null>(null);
   const [fotos, setFotos] = useState<File[]>([]);
-  const [result, setResult] = useState<unknown>(null);
+  const [result, setResult] = useState<CreateCaseResult | null>(null);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
 
@@ -30,8 +40,8 @@ export default function Home() {
       const res = await fetch("/api/case/create", { method: "POST", body: fd });
       const json = await res.json();
       const j = json as Record<string, unknown>;
-      if (!res.ok) throw new Error(j?.detail || j?.error || "Erro");
-      setResult(j);
+      if (!res.ok) throw new Error(String((j as any)?.detail ?? (j as any)?.error ?? "Erro"));
+      setResult(jj as CreateCaseResult
     } catch (err: unknown) {
       setError(err instanceof Error ? err.message : String(err));
     } finally {
