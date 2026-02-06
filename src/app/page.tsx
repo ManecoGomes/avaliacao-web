@@ -41,7 +41,7 @@ export default function Home() {
       const json = await res.json();
       const j = json as Record<string, unknown>;
       if (!res.ok) throw new Error(String((j as any)?.detail ?? (j as any)?.error ?? "Erro"));
-      setResult(jj as CreateCaseResult
+setResult(j as CreateCaseResult);
     } catch (err: unknown) {
       setError(err instanceof Error ? err.message : String(err));
     } finally {
